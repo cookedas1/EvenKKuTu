@@ -33,7 +33,6 @@
 ```
 본 서버는 JJoriping의 KKuTu를 기반으로 하는 cookedas1의 EvenKKuTu를 기반으로 하는 cookedas1의 EvenKKuTu를 기반으로 두고 있습니다.
 ```
-```
 
 * **위 문구의 의미를 해치지 않는 선에서 아래와 같은 느낌으로 수정하는 것은 허용됩니다.**
 ```
