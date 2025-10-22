@@ -17,12 +17,22 @@
  */
 
 var GLOBAL	 = require("./global.json");
+var MainDB	 = require("../Web/db");
 var JLog	 = require("./jjlog");
 var Language = {
 	'ko_KR': require("../Web/lang/ko_KR.json"),
 	'en_US': require("../Web/lang/en_US.json")
 };
 
+for(let lang in Language) updateThemes(lang);
+
+function updateThemes(lang){
+	Language[lang].themes = {};
+	for(let j in Language[lang].kkutu)
+		if(j.includes("theme_"))
+			Language[lang].themes[j] = Language[lang].kkutu[j];
+		MainDB.kkutu_shop_desc.refreshLanguage(Language);
+}
 function updateLanguage(){
 	var i, src;
 	
@@ -31,6 +41,8 @@ function updateLanguage(){
 		
 		delete require.cache[require.resolve(src)];
 		Language[i] = require(src);
+
+		updateThemes(i);
 	}
 }
 function getLanguage(locale, page, shop){
@@ -41,6 +53,7 @@ function getLanguage(locale, page, shop){
 	for(i in L.GLOBAL) R[i] = L.GLOBAL[i];
 	if(shop) for(i in L.SHOP) R[i] = L.SHOP[i];
 	for(i in L[page]) R[i] = L[page][i];
+	if(page == "help") Object.assign(R, L.themes);
 	if(R['title']) R['title'] = `[${process.env['KKT_SV_NAME']}] ${R['title']}`;
 	
 	return R;
