@@ -40,9 +40,10 @@ function process(req, accessToken, MainDB, $p, done) {
     MainDB.users.findOne([ '_id', $p.id ]).on(($body) => {
         req.session.profile = $p;
         MainDB.users.update([ '_id', $p.id ]).set([ 'lastLogin', now ]).on();
+
+        done(null, $p);
     });
 
-    done(null, $p);
 }
 
 exports.run = (Server, page) => {
@@ -66,12 +67,21 @@ exports.run = (Server, page) => {
 				failureRedirect: '/loginfail'
 			}))
 			passport.use(new auth.config.strategy(auth.strategyConfig, auth.strategy(process, MainDB /*, Ajae */)));
-			strategyList[auth.config.vendor] = {
-				vendor: auth.config.vendor,
-				displayName: auth.config.displayName,
-				color: auth.config.color,
-				fontColor: auth.config.fontColor
-			};
+            if(auth.config.useOAuthButtons) {
+                strategyList[auth.config.vendor] = {
+                    useOAuthButtons: true,
+                    vendor: auth.config.vendor,
+                    displayName: auth.config.displayName
+                }
+            } else {
+                strategyList[auth.config.vendor] = {
+                    vendor: auth.config.vendor,
+                    displayName: auth.config.displayName,
+                    color: auth.config.color,
+                    fontColor: auth.config.fontColor,
+                    useOAuthButtons: false
+                };
+            }
 
 			JLog.info(`OAuth Strategy ${i} loaded successfully.`)
 		} catch (error) {
