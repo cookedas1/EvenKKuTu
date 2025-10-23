@@ -15,23 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
-var GLOBAL	 = require("./global.json");
-var MainDB	 = require("../Web/db");
-var JLog	 = require("./jjlog");
+var GLOBAL = require("./global.json");
+var MainDB = require("../Web/db");
+var JLog = require("./jjlog");
 var Language = {
-	'ko_KR': require("../Web/lang/ko_KR.json"),
-	'en_US': require("../Web/lang/en_US.json")
+  'ko_KR': require("../Web/lang/ko_KR.json"),
+  'en_US': require("../Web/lang/en_US.json")
 };
 
-for(let lang in Language) updateThemes(lang);
+for (let lang in Language) {
+  updateThemes(lang);
+}
 
-function updateThemes(lang){
-	Language[lang].themes = {};
-	for(let j in Language[lang].kkutu)
-		if(j.includes("theme_"))
-			Language[lang].themes[j] = Language[lang].kkutu[j];
-		MainDB.kkutu_shop_desc.refreshLanguage(Language);
+function updateThemes(lang) {
+  Language[lang].themes = {};
+  for (let j in Language[lang].kkutu) {
+    if (j.includes("theme_")) {
+      Language[lang].themes[j] = Language[lang].kkutu[j];
+    }
+  }
 }
 function updateLanguage(){
 	var i, src;
