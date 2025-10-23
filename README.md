@@ -22,6 +22,12 @@
 - PostgreSQL 14.9
 - Git
 
+### 만약 서버를 세팅한다면
+기존 [끄투](https://github.com/JJoriping/KKuTu)의 세팅 방법과 같습니다. 만약 컬럼에 nickname, nickChanged가 추가되어있지 않다면, users 테이블에 nickname (text), nickChanged (text)를 추가해주시길 바랍니다.
+
+1. psql을 이용해 main 데이터베이스에 접속합니다.
+2. ALTER TABLE users를 치고 ADD COLUMN nickname text, 를 치고 ADD COLUMN "nickChanged" text; 를 치면 컬럼이 추가됩니다.
+
 ### 라이선스
 본 프로젝트는 [GNU 일반 공중 사용 라이선스](https://github.com/cookedas1/KKuTu/blob/master/LICENSE)를 사용합니다.
 모든 이미지 및 사운드는 [크리에이티브 커먼즈 라이선스 CC BY](https://creativecommons.org/licenses/by/4.0)를 사용합니다.
