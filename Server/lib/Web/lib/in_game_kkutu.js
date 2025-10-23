@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 Rule the words! KKuTu Online
 Copyright (C) 2017 JJoriping(op@jjo.kr)
 
@@ -18,8 +17,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 (function(){
 /**
-=======
->>>>>>> pr/DrawQuiz
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
  * 
@@ -66,11 +63,7 @@ var $stage;
 var $sound = {};
 var $_sound = {}; // 현재 재생 중인 것들
 var $data = {};
-<<<<<<< HEAD
-var $lib = { Classic: {}, Jaqwi: {}, Crossword: {}, Typing: {}, Hunmin: {}, Daneo: {}, Sock: {} };
-=======
 var $lib = { Classic: {}, Jaqwi: {}, Crossword: {}, Typing: {}, Hunmin: {}, Daneo: {}, Sock: {}, Drawing: {} };
->>>>>>> pr/DrawQuiz
 var $rec;
 var mobile;
 
@@ -97,11 +90,8 @@ var _setTimeout = setTimeout;
  */
 
 $(document).ready(function(){
-<<<<<<< HEAD
-=======
 	window.differ = new diff_match_patch()
 
->>>>>>> pr/DrawQuiz
 	var i;
 	
 	$data.PUBLIC = $("#PUBLIC").html() == "true";
@@ -228,12 +218,9 @@ $(document).ready(function(){
 		game: {
 			display: $(".jjo-display"),
 			hints: $(".GameBox .hints"),
-<<<<<<< HEAD
-=======
 			tools: $('.GameBox .tools'),
 			drawingTitle: $('#drawing-title'),
 			themeisTitle: $('#themeis-title'),
->>>>>>> pr/DrawQuiz
 			cwcmd: $(".GameBox .cwcmd"),
 			bb: $(".GameBox .bb"),
 			items: $(".GameBox .items"),
@@ -372,13 +359,8 @@ $(document).ready(function(){
 		var value = (mobile && $stage.game.here.is(':visible'))
 			? $stage.game.hereText.val()
 			: $stage.talk.val();
-<<<<<<< HEAD
 		if(!value) return;
 		var o = { value: value.trim() };
-=======
-		var o = { value: value };
-		if(!value) return;
->>>>>>> pr/DrawQuiz
 		if(o.value[0] == "/"){
 			o.cmd = o.value.split(" ");
 			runCommand(o.cmd);
@@ -790,11 +772,7 @@ $(document).ready(function(){
 		var fileName = "KKuTu" + (
 			date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
 			+ date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds()
-<<<<<<< HEAD
 		) + ".replay";
-=======
-		) + ".kkt";
->>>>>>> pr/DrawQuiz
 		var $a = $("<a>").attr({
 			'download': fileName,
 			'href': url
@@ -1808,8 +1786,117 @@ $lib.Daneo.turnEnd = function(id, data){
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
-<<<<<<< HEAD
-=======
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$lib.Sock.roundReady = function(data, spec){
+	var turn = data.seq ? data.seq.indexOf($data.id) : -1;
+	
+	clearBoard();
+	$data._relay = true;
+	$(".jjoriping,.rounds,.game-body").addClass("cw");
+	$data._va = [];
+	$data._lang = RULE[MODE[$data.room.mode]].lang;
+	$data._board = data.board;
+	$data._maps = [];
+	$data._roundTime = $data.room.time * 1000;
+	$data._fastTime = 10000;
+	$stage.game.items.hide();
+	$stage.game.bb.show();
+	$lib.Sock.drawDisplay();
+	drawRound(data.round);
+	if(!spec) playSound('round_start');
+	clearInterval($data._tTime);
+};
+$lib.Sock.turnEnd = function(id, data){
+	var $sc = $("<div>").addClass("deltaScore").html("+" + data.score);
+	var $uc = $("#game-user-" + id);
+	var key;
+	var i, j, l;
+	
+	if(data.score){
+		key = data.value;
+		l = key.length;
+		$data._maps.push(key);
+		for(i=0; i<l; i++){
+			$data._board = $data._board.replace(key.charAt(i), "　");
+		}
+		if(id == $data.id){
+			playSound('success');
+		}else{
+			playSound('mission');
+		}
+		$lib.Sock.drawDisplay();
+		addScore(id, data.score);
+		updateScore(id, getScore(id));
+		drawObtainedScore($uc, $sc);
+	}else{
+		stopBGM();
+		$data._relay = false;
+		playSound('horr');
+	}
+};
+$lib.Sock.drawMaps = function(){
+	var i;
+	
+	$stage.game.bb.empty();
+	$data._maps.sort(function(a, b){ return b.length - a.length; }).forEach(function(item){
+		$stage.game.bb.append($word(item));
+	});
+	function $word(text){
+		var $R = $("<div>").addClass("bb-word");
+		var i, len = text.length;
+		var $c;
+		
+		for(i=0; i<len; i++){
+			$R.append($c = $("<div>").addClass("bb-char").html(text.charAt(i)));
+			// if(text.charAt(i) != "？") $c.css('color', "#EEEEEE");
+		}
+		return $R;
+	}
+};
+$lib.Sock.drawDisplay = function(){
+	var $a = $("<div>").css('height', "100%"), $c;
+	var va = $data._board.split("");
+	var size = ($data._lang == "ko") ? "12.5%" : "10%";
+	
+	va.forEach(function(item, index){
+		$a.append($c = $("<div>").addClass("sock-char sock-" + item).css({ width: size, height: size }).html(item));
+		if($data._va[index] && $data._va[index] != item){
+			$c.html($data._va[index]).addClass("sock-picked").animate({ 'opacity': 0 }, 500);
+		}
+	});
+	$data._va = va;
+	$stage.game.display.empty().append($a);
+	$lib.Sock.drawMaps();
+};
+$lib.Sock.turnStart = function(data, spec){
+	var i, j;
+	
+	clearInterval($data._tTime);
+	$data._tTime = addInterval(turnGoing, TICK);
+	playBGM('jaqwi');
+};
+$lib.Sock.turnGoing = $lib.Jaqwi.turnGoing;
+$lib.Sock.turnHint = function(data){
+	playSound('fail');
+};
+
+/**
+ * Rule the words! KKuTu Online
+ * Copyright (C) 2017 JJoriping(op@jjo.kr)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -2073,118 +2160,6 @@ $lib.Drawing.diffNotValid = function (msg) {
     send('drawingCanvas', {diffed: false, data: $data._fullImageString}, false)
   }
 }
-/**
- * Rule the words! KKuTu Online
- * Copyright (C) 2017 JJoriping(op@jjo.kr)
->>>>>>> pr/DrawQuiz
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
-$lib.Sock.roundReady = function(data, spec){
-	var turn = data.seq ? data.seq.indexOf($data.id) : -1;
-	
-	clearBoard();
-	$data._relay = true;
-	$(".jjoriping,.rounds,.game-body").addClass("cw");
-	$data._va = [];
-	$data._lang = RULE[MODE[$data.room.mode]].lang;
-	$data._board = data.board;
-	$data._maps = [];
-	$data._roundTime = $data.room.time * 1000;
-	$data._fastTime = 10000;
-	$stage.game.items.hide();
-	$stage.game.bb.show();
-	$lib.Sock.drawDisplay();
-	drawRound(data.round);
-	if(!spec) playSound('round_start');
-	clearInterval($data._tTime);
-};
-$lib.Sock.turnEnd = function(id, data){
-	var $sc = $("<div>").addClass("deltaScore").html("+" + data.score);
-	var $uc = $("#game-user-" + id);
-	var key;
-	var i, j, l;
-	
-	if(data.score){
-		key = data.value;
-		l = key.length;
-		$data._maps.push(key);
-		for(i=0; i<l; i++){
-			$data._board = $data._board.replace(key.charAt(i), "　");
-		}
-		if(id == $data.id){
-			playSound('success');
-		}else{
-			playSound('mission');
-		}
-		$lib.Sock.drawDisplay();
-		addScore(id, data.score);
-		updateScore(id, getScore(id));
-		drawObtainedScore($uc, $sc);
-	}else{
-		stopBGM();
-		$data._relay = false;
-		playSound('horr');
-	}
-};
-$lib.Sock.drawMaps = function(){
-	var i;
-	
-	$stage.game.bb.empty();
-	$data._maps.sort(function(a, b){ return b.length - a.length; }).forEach(function(item){
-		$stage.game.bb.append($word(item));
-	});
-	function $word(text){
-		var $R = $("<div>").addClass("bb-word");
-		var i, len = text.length;
-		var $c;
-		
-		for(i=0; i<len; i++){
-			$R.append($c = $("<div>").addClass("bb-char").html(text.charAt(i)));
-			// if(text.charAt(i) != "？") $c.css('color', "#EEEEEE");
-		}
-		return $R;
-	}
-};
-$lib.Sock.drawDisplay = function(){
-	var $a = $("<div>").css('height', "100%"), $c;
-	var va = $data._board.split("");
-	var size = ($data._lang == "ko") ? "12.5%" : "10%";
-	
-	va.forEach(function(item, index){
-		$a.append($c = $("<div>").addClass("sock-char sock-" + item).css({ width: size, height: size }).html(item));
-		if($data._va[index] && $data._va[index] != item){
-			$c.html($data._va[index]).addClass("sock-picked").animate({ 'opacity': 0 }, 500);
-		}
-	});
-	$data._va = va;
-	$stage.game.display.empty().append($a);
-	$lib.Sock.drawMaps();
-};
-$lib.Sock.turnStart = function(data, spec){
-	var i, j;
-	
-	clearInterval($data._tTime);
-	$data._tTime = addInterval(turnGoing, TICK);
-	playBGM('jaqwi');
-};
-$lib.Sock.turnGoing = $lib.Jaqwi.turnGoing;
-$lib.Sock.turnHint = function(data){
-	playSound('fail');
-};
-
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
@@ -2480,8 +2455,6 @@ function onMessage(data){
 				chat(data.profile || { title: L['robot'] }, data.value, data.from, data.timestamp);
 			}
 			break;
-<<<<<<< HEAD
-=======
 		case 'drawCanvas':
 			if ($stage.game.canvas) {
 				drawCanvas(data);
@@ -2491,7 +2464,6 @@ function onMessage(data){
 			if ($stage.game.canvas) {
 				diffNotValid(data);
 			}
->>>>>>> pr/DrawQuiz
 		case 'roomStuck':
 			rws.close();
 			break;
@@ -2694,7 +2666,6 @@ function onMessage(data){
 					alert("생년월일이 올바르게 입력되지 않아 게임 이용이 제한되었습니다. 잠시 후 다시 시도해 주세요.");
 					break;
 				}
-<<<<<<< HEAD
 			/* Enhanced User Block System [S] */
 				if(!data.blockedUntil) break;
 				
@@ -2715,8 +2686,6 @@ function onMessage(data){
 				alert("[#446] " + L['error_446'] + i + block);
 				break;
 			/* Enhanced User Block System [E] */
-=======
->>>>>>> pr/DrawQuiz
 			} else if (data.code === 447) {
 				alert("자동화 봇 방지를 위한 캡챠 인증에 실패했습니다. 메인 화면에서 다시 시도해 주세요.");
 				break;
@@ -4124,18 +4093,12 @@ function clearBoard(){
 	$stage.dialog.dress.hide();
 	$stage.dialog.charFactory.hide();
 	$(".jjoriping,.rounds,.game-body").removeClass("cw");
-<<<<<<< HEAD
-	$stage.game.display.empty();
-	$stage.game.chain.hide();
-	$stage.game.hints.empty().hide();
-=======
 	$('.jjoriping,.rounds').removeClass('dg')
 	$('.rounds').removeClass('painter')
 	$stage.game.display.empty();
 	$stage.game.chain.hide();
 	$stage.game.hints.empty().hide();
 	$stage.game.tools.hide();
->>>>>>> pr/DrawQuiz
 	$stage.game.cwcmd.hide();
 	$stage.game.bb.hide();
 	$stage.game.round.empty();
@@ -4199,10 +4162,7 @@ function roundEnd(result, data){
 	$stage.game.display.html(L['roundEnd']);
 	$data._resultPage = 1;
 	$data._result = null;
-<<<<<<< HEAD
-=======
 	$data._relay = false
->>>>>>> pr/DrawQuiz
 	for(i in result){
 		r = result[i];
 		if($data._replay){
@@ -4951,15 +4911,12 @@ function chat(profile, msg, from, timestamp){
 	addonNickname($bar, { equip: equip });
 	$stage.chat.scrollTop(999999999);
 }
-<<<<<<< HEAD
-=======
 function drawCanvas (data) {
 	route('drawCanvas', data);
 }
 function diffNotValid(data) {
 	route('diffNotValid', data);
 }
->>>>>>> pr/DrawQuiz
 function notice(msg, head){
 	var time = new Date();
 	
@@ -5139,9 +5096,5 @@ function yell(msg){
  */
 
 delete window.WebSocket;
-<<<<<<< HEAD
 delete window.setInterval;
 })();
-=======
-delete window.setInterval;
->>>>>>> pr/DrawQuiz
