@@ -1,4 +1,5 @@
 {
+	"server-name": "EvenKKuTu",
 	"ADMIN": [ "Input admin id here" ],
 	"MAIN_PORTS": [ 8080 ],
 	"WEB_PORT": 80,
@@ -12,6 +13,9 @@
 	"PG_PASSWORD": "Your PostgreSQL Password Here",
 	"PG_PORT": 5432,
 	"PG_DATABASE": "main",
+	"web-num-cpu": 1,
+	"game-num-cpu": 1,
+	"game-num-inst": 1,
 	"GOOGLE_RECAPTCHA_TO_GUEST": false,
 	"GOOGLE_RECAPTCHA_TO_USER": false,
 	"GOOGLE_RECAPTCHA_SITE_KEY": "Your Google Recaptcha site key Here",

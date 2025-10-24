@@ -17,7 +17,7 @@
  */
 
 const PKG = require("./package.json");
-const SETTINGS = require("../settings.json");
+const SETTINGS = require("./lib/sub/global.json");
 const {
 	app: App,
 	BrowserWindow,
