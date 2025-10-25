@@ -28,9 +28,7 @@
 		]},*/
 		{ key: 'GAMES', sub: [
 			{ key: 'GAMES_KKUTU', href: "/" },
-			{ key: 'GAMES_FATES', href: "http://jjo.kr/game/fates" }
 		]},
-		{ key: 'GALLERY', href: "http://jjo.kr/gallery" }
 	];
 	const PUBLIC = locals.published;
 	
@@ -80,7 +78,6 @@ mixin MMenu()
 			+separator(10)
 			div.menu-sub-btn(onclick='location.href = "http://jjo.kr/";', style='margin: 7px 0px; height: 25px;')!= L('HOME')
 			div.menu-sub-btn(onclick='location.href = "http://kkutu.kr/";', style='margin: 7px 0px; height: 25px;')!= L('GAMES_KKUTU')
-			div.menu-sub-btn(onclick='location.href = "http://jjo.kr/gallery";', style='margin: 7px 0px; height: 25px;')!= L('GALLERY')
 		div#quick-search
 			input#quick-search-tf(placeholder=L('QUICK_HOLDER'))
 			button#quick-search-btn!= L('QUICK_BTN')
