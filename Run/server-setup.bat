@@ -1,3 +1,4 @@
+cd ../
 cd ./Server
 node setup
 cd ./lib
