@@ -27,7 +27,7 @@ exports.SPAM_LIMIT = 7;
 exports.BLOCKED_LENGTH = 10000;
 exports.KICK_BY_SPAM = 9;
 exports.MAX_OBSERVER = 4;
-exports.TESTER = GLOBAL.ADMIN.concat([
+exports.TESTER = GLOBAL.ADMIN.concat([ // 테스터 서버 참가자 id
 	"Input tester id here"
 ]);
 exports.IS_SECURED = GLOBAL.IS_SECURED;
