@@ -141,15 +141,33 @@ span{
 	transition: color 300ms ease;
 }
 #account-info:hover{ color: #EEEEEE; }
+
+
+@keyframes scroller {
+	from {
+	  -moz-transform: translateX(100%);
+	  -webkit-transform: translateX(100%);
+	  transform: translateX(100%);
+	}
+	to {
+	  -moz-transform: translateX(-100%);
+	  -webkit-transform: translateX(-100%);
+	  transform: translateX(-100%);
+	}
+}
+
 #global-notice{
 	padding: 3px 0px;
-	margin-top: 30px;
-	color: #111111;
+	margin-top: 60px;
+	color: white;
 	text-align: center;
-	font-weight: bold;
-	background-color: #EEBB33;
+	background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
 	z-index: 5;
+
+	animation: scroller 60s linear infinite;
 }
+
 .searching{
 	color: #EEEEEE;
 	background-color: #555555;
