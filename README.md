@@ -8,7 +8,10 @@
 > 본 레포지토리에서 배포되는 소스 코드에는 별도의 지원이 포함되어있지 않으며, 이븐 스튜디오에서는 본 레포지토리의 일부(또는 전체)를 사용함으로써 발생하는 모드 문제에 대하여 책임지지 않습니다.
 
 ## 꼭 읽어주세요
-**본 레포지토리는 끄투리오 운영 목적으로 사용되어 이븐끄투에 저작권이 존재하는 리소스들도 존재하므로 사용에 주의가 필요합니다.**
+**본 레포지토리는 이븐끄투 운영 목적으로 사용되어 이븐끄투에 저작권이 존재하는 리소스들도 존재하므로 사용에 주의가 필요합니다.**
+본 프로젝트는 [githubmahan](https://github.com/githubmahan)의 [KKuTu](https://github.com/githubmahan/KKuTu)를 일부 포함하고 있습니다.
+
+본 프로젝트를 사용할 경우 라이선스 파일을 GPL에서 AGPL로 변경해주시길 바랍니다.
 
 ### 프로젝트 설명
 본 프로젝트는 기존 [끄투](https://github.com/JJoriping/KKuTu)의 소스 코드를 수정하여 버그 또는 기능 패치를 진행할 때 불필요하게 소요되는 시간을 줄이기 위해 만들어졌습니다.
@@ -29,7 +32,7 @@
 2. ALTER TABLE users를 치고 ADD COLUMN nickname text, 를 치고 ADD COLUMN "nickChanged" text; 를 치면 컬럼이 추가됩니다.
 
 ### 라이선스
-본 프로젝트는 [GNU 일반 공중 사용 라이선스](https://github.com/cookedas1/KKuTu/blob/master/LICENSE)를 사용합니다.
+본 프로젝트는 [GNU 아페로 일반 공중 사용 라이선스](https://github.com/cookedas1/EvenKKuTu/blob/master/LICENSE)를 사용합니다.
 모든 이미지 및 사운드는 [크리에이티브 커먼즈 라이선스 CC BY](https://creativecommons.org/licenses/by/4.0)를 사용합니다.
 **본 레포지토리를 이용해 끄투 서버를 열 목적인 경우, 크리에이티브 커먼즈 라이선스 CC BY를 생략할 수 있습니다.**
 
