@@ -19,8 +19,7 @@ var GLOBAL = require("./global.json");
 var MainDB = require("../Web/db");
 var JLog = require("./jjlog");
 var Language = {
-  'ko_KR': require("../Web/lang/ko_KR.json"),
-  'en_US': require("../Web/lang/en_US.json")
+  'ko_KR': require("../Web/lang/ko_KR.json")
 };
 
 for (let lang in Language) {

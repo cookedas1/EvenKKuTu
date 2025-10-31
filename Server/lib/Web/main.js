@@ -39,8 +39,7 @@ var https	 = require('https');
 var fs		 = require('fs');
 
 var Language = {
-	'ko_KR': require("./lang/ko_KR.json"),
-	'en_US': require("./lang/en_US.json")
+	'ko_KR': require("./lang/ko_KR.json")	
 };
 var ROUTES = { major: {}, consume: {}, admin: {}, login: {} };
 var page = WebInit.page;

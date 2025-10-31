@@ -22,8 +22,7 @@ var GLOBAL	 = require("../../sub/global.json");
 var JLog	 = require("../../sub/jjlog");
 var Lizard	 = require("../../sub/lizard.js");
 var Language = {
-	'ko_KR': require("../lang/ko_KR.json"),
-	'en_US': require("../lang/en_US.json")
+	'ko_KR': require("../lang/ko_KR.json")
 };
 
 exports.run = function(Server, page){
