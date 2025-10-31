@@ -282,10 +282,10 @@ Server.get("/", function(req, res){
 			'KO_THEME': Const.KO_THEME,
 			'EN_THEME': Const.EN_THEME,
 			'IJP_EXCEPT': Const.IJP_EXCEPT,
-			'ogImage': "http://kkutu.kr/img/kkutu/logo.png",
-			'ogURL': "http://kkutu.kr/",
-			'ogTitle': "글자로 놀자! 끄투 온라인",
-			'ogDescription': "끝말잇기가 이렇게 박진감 넘치는 게임이었다니!"
+			'ogImage': "http://evenkkutu.kro.kr/img/kkutu/logo.png",
+			'ogURL': "http://evenkkutu.kro.kr/",
+			'ogTitle': "끄투를 새롭게! 이븐끄투",
+			'ogDescription': "이븐끄투에서 여러가지 끝말잇기 게임을 즐겨보세요!"
 		});
 	}
 });
